@@ -5,14 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    detail:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
+  onLoad(query) {
 
+    const id = query.id
+    this.getDetail(id)    
   },
 
   /**
@@ -62,5 +64,13 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+
+  async getDetail(id) {
+    const res = await wx.http.get(`/announcement/${id}`)
+    this.setData({
+      detail: res.data
+    })
+    
   }
 })
