@@ -55,7 +55,7 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {},
-  "appid": "wx17dde52226283fd6",
+  "appid": "touristappid",
   "libVersion": "2.26.0",
   "editorSetting": {
     "tabIndent": "insertSpaces",

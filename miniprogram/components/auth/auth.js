@@ -23,6 +23,7 @@ Component({
   },
 
   lifetimes: {
+    // 相当于vue的mounted
     attached() {
 
       const app = getApp()
@@ -32,17 +33,24 @@ Component({
       })
       
       if (!isLogin) {
-        // wx.navigateTo 保留当前页面，跳转到应用内的某个页面
+        // wx.navigateTo() 保留当前页面，跳转到应用内的某个页面
+        // 相当于vue的this.$router.push()
+
+        // wx.redirectTo() 相当于Vue的this.$router.replace()
 
         // 获取当前页面栈数组
         const pages = getCurrentPages()
         // 获取当前页面实例
         const currentPage = pages[pages.length -1]
+        console.log(currentPage);
+        
         const { route, options } = currentPage
+        console.log(route, options);
+        
 
         // 关闭当前页面，跳转到应用内的某个页面。
         wx.redirectTo({
-          url: '/pages/login/index'
+          url: '/pages/login/index?redirectUrl=/' + route 
         })
       }
     }

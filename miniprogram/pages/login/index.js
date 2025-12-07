@@ -6,7 +6,13 @@ Page({
   data: {
     countDownVisible: false,
     mobile: '',
-    code: ''
+    code: '',
+  },
+
+  onLoad(query) {
+    this.query = query
+    // console.log(query);
+    
   },
 
   // 校验规则
@@ -63,14 +69,14 @@ Page({
         mobile,
         code
       })
-      // console.log(res.data);
+    //   console.log(res);
       const app = getApp()
       app.setToken('token', res.data.token)
       app.setToken('refresh_token', res.data.refreshToken)
       wx.utils.toast('登录成功')
       setTimeout(() => {
-        wx.rewriteRoute({
-          url: '/pages/index/index'
+        wx.redirectTo({
+          url: this.query.redirectUrl
         })
         
       }, 1500)

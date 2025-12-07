@@ -7,11 +7,17 @@ http.baseURL = 'https://live-api.itheima.net';
 
 http.intercept.response = (res) => {
 
-  console.log('响应被我拦截到了', res);
+  // console.log('响应被我拦截到了', res.data);
+  if (res.data.code === 10000) {
+    
+    return res.data
+  } else {
+    wx.utils.toast(res.data.message || '业务错误')
+    return Promise.reject(res.data)
+  }
   
-  return res.data
 }
-
+ 
 
 // 到出
 
