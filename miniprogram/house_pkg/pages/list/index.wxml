@@ -24,6 +24,10 @@
               <van-cell title="房间号" border="{{false}}" value="1号楼1单元101室" />
               <van-cell title="业主" border="{{false}}" value="姜晓峰" />
             </van-cell-group>
+
+
+
+            
             <view slot="right">
               删除
             </view>

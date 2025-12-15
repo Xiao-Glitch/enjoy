@@ -1,18 +1,74 @@
 // house_pkg/pages/locate/index.ts
+
+import QQMapWX from '../../../libs/qqmap-wx-jssdk'
+
+    // 创建地图对象
+    const qqmapsdk = new QQMapWX({
+      key: 'B47BZ-UVNK3-4MR34-RDU4V-DEKI7-NLBGK'
+    })
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    list: [],
+    address: ''
   },
 
+  search({longitude, latitude}) {
+    qqmapsdk.search({
+      location: {
+        longitude,
+        latitude
+      },
+      keyword: '住宅小区',
+      page_size: 5,
+      success: (res) => {
+        // console.log(res);
+        this.setData({
+          list: res.data
+        })
+      }
+    })
+  },
+
+  getPonit({ longitude, latitude}) {
+    qqmapsdk.reverseGeocoder({
+      location: {
+        longitude,
+        latitude
+      },
+      success: (res) => {
+        // console.log('逆地址解析', res);
+        this.setData({
+          address: res.result.address
+        })
+        
+      }
+    })
+  },
+
+  // 打开地图选择位置
+  async chooseLocation() {
+    const {name, latitude, longitude} = await wx.chooseLocation()
+    // console.log('选择位置', res);
+    this.setData({
+      address: name
+    })
+    // 基于新选择的经纬度，重新地理位置搜索
+    this,this.search({latitude, longitude})
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
-
+  async onLoad() { 
+    const { longitude, latitude } = await wx.getLocation({
+      type: 'wgs84',
+    })
+    this.search({ longitude, latitude })
+    this.getPonit({ longitude, latitude })
+    console.log('当前地理位置：' ,{ longitude, latitude });
   },
 
   /**

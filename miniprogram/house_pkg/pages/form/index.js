@@ -10,9 +10,12 @@ Page({
       url: '/house_pkg/pages/list/index',
     })
   },
-  removePicture(ev) {
+  removePicture() {
     // 移除图片的类型（身份证正面或反面）
-    const type = ev.mark?.type
-    this.setData({ [type]: '' })
+    // const type = ev.mark?.type
+    // this.setData({ [type]: '' })
   },
+  onLoad({ point, building, room }) {
+    this.setData({ point, building, room })
+  }
 })
