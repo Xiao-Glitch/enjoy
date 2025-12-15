@@ -5,14 +5,68 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    userInfo: {}
   },
 
+  async getUserInfo() {
+    const res = await wx.http.get('/userInfo')
+
+    this,this.setData({
+      userInfo: res.data
+    })
+  },
+
+  async updateNickName(e) {
+    // console.log('修改昵称', e.detail.value);
+    const res = await wx.http.put('/userInfo', {
+      nickName: e.detail.value,
+    })
+
+    console.log('修改昵称结果', res);
+    
+  },
+
+  async updateAvatar(e) {
+    // console.log('修改头像', e.detail.avatarUrl);
+    
+    // 上传头像
+    // wx.uploadFile({
+    //   url: wx.http.baseURL + '/upload',
+    //   header: {
+    //     Authorization:'Bearer ' + wx.getStorageSync('token')
+    //   },
+    //   name: 'file',
+    //   filePath: e.detail.avatarUrl,
+    //   formData: {
+    //     type: 'avatar'
+    //   },
+    //   success: (res) => {
+    //     res.data = JSON.parse(res.data)
+    //     // console.log('res', res)
+    //     this.setData({
+    //       'userInfo.avatar': res.data.url
+    //     })
+        
+    //   }
+    // })  
+
+    const res = await wx.http.upload('/upload', {
+      name: 'file',
+      filePath: e.detail.avatarUrl,
+      formData: {
+        type: 'avatar'
+      }
+    })
+
+    this.setData({
+      'userInfo.avatar': res.data.url
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    this.getUserInfo()
   },
 
   /**
