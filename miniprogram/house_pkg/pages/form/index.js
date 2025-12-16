@@ -38,8 +38,24 @@ Page({
     const type = ev.mark?.type
     this.setData({ [type]: '' })
   },
-  onLoad({ point, building, room }) {
-    this.setData({ point, building, room })
+  onLoad({ point, building, room, id }) {
+    if (id) {
+      this.getDetail(id)
+      // console.log(id);
+      wx.setNavigationBarTitle({title: '修改房屋信息'})
+    } else {
+      
+      this.setData({ point, building, room })
+      wx.setNavigationBarTitle({title: '添加房屋信息'})
+    }
+  },
+
+  async getDetail(id) {
+    const res = await wx.http.get(`/room/${id}`)
+
+    this,this.setData({
+      ...res.data
+    })
   },
 
   //提交审核
