@@ -2,8 +2,8 @@
   <view class="house-detail">
     <van-cell-group border="{{false}}" title="房屋信息">
       <van-cell title="{{house.point}}">
-        <text class="tag {{house.status === 1 ? 'success' : house.status === 2 ? 'info' : 'fail'}}"
-          >{{house.status === 1 ? '审核通过': house.status=== 2 ? '审核中': '审核失败'}}
+        <text class="tag {{house.status === 2 ? 'success' : house.status === 1 ? 'info' : 'fail'}}"
+          >{{house.status === 2 ? '审核通过': house.status=== 1 ? '审核中': '审核失败'}}
         </text>
       </van-cell>
     </van-cell-group>

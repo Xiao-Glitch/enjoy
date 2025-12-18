@@ -7,8 +7,8 @@
           <van-swipe-cell wx:for="{{list}}" wx:key="id" async-close bind:close="swipeClose" mark:id="{{item.id}}" right-width="{{ 70 }}">
             <van-cell-group bind:tap="goDetail" mark:id="{{item.id}}" border="{{false}}">
               <van-cell size="large" title="{{item.point}}">
-                <text class="tag {{item.status === 1 ? 'success' : item.status === 2 ? 'info' : 'fail'}}"
-                  >{{item.status === 1 ? '审核通过': item.status=== 2 ? '审核中': '审核失败'}}
+                <text class="tag {{item.status === 2 ? 'success' : item.status === 1 ? 'info' : 'fail'}}"
+                  >{{item.status === 2 ? '审核通过': item.status=== 1 ? '审核中': '审核失败'}}
                 </text>
               </van-cell>
               <van-cell title="房间号" border="{{false}}" value="{{item.point}}{{item.building}}{{item.room}}" />
