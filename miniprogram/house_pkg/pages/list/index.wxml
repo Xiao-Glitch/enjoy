@@ -1,5 +1,5 @@
 <auth>
-  <block wx:if="{{list.length > 0}}">
+  <block wx:if="{{isFristLoad || list.length > 0}}">
     <scroll-view show-scrollbar="{{false}}" enhanced scroll-y>
       <view class="houses">
         <view class="houses-title">房屋信息</view>

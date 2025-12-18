@@ -18,7 +18,7 @@ Page({
     idcardFrontUrl: [{ required: true, message: '请上传身份证国徽面' }],
   },
   data: {
-    id: '',
+    id: undefined,
     point: '',
     building: '',
     room: '',
@@ -66,7 +66,7 @@ Page({
     if (isAllValid === false) return
 
     // eslint-disable-next-line no-unused-vars
-    const { __webviewId__, id, ...body } = this.data
+    const { __webviewId__, status, ...body } = this.data
     // console.log(id, __webViewId__)
     // console.log(body);
     
@@ -75,7 +75,7 @@ Page({
     // 后退回列表页，后退四级，中间的页面都要销毁
     wx.utils.toast('提交成功！')
     setTimeout(() => {
-      wx.navigateBack({ delta: 4 })
+      wx.navigateBack({ delta: body.id ? 2 : 4 })
     }, 400);
     // console.log(res)
   },

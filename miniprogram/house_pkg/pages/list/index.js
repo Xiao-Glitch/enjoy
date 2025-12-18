@@ -2,6 +2,7 @@ Page({
   data: {
     dialogVisible: false,
     list: [],
+    isFristLoad: true
   },
 
   // 页面显示获取房屋列表
@@ -14,6 +15,7 @@ Page({
     console.log(res)
     this.setData({
       list: res.data,
+      isFristLoad: false
     })
   },
 
