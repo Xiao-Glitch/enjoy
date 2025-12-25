@@ -58,8 +58,9 @@ Page({
   async submitForm() {
     // 验证表单
     if (!this.validate()) return
-    const { houseId, repairItemId, mobile, appointment, description, attachment } = this.data
+    const {id, houseId, repairItemId, mobile, appointment, description, attachment } = this.data
     const res = await wx.http.post('/repair', {
+      id,
       houseId,
       repairItemId,
       mobile,
@@ -137,10 +138,24 @@ Page({
   onLoad(query) {
     this.getHouseList()
     this.getRepairList()
+
     this.setData({
       id: query.id
     })
+
+    if (query.id) this.getRepairDetail(query.id)
   },
+
+  async getRepairDetail(id) {
+    const {code, data: repairDetail} = await wx.http.get('/repair/' + id)
+    if (code !== 10000) return wx.utils.toast()
+      // console.log('获取保修信息', repairDetail);
+  this.setData({
+    ...repairDetail
+  })
+      
+  },
+
   async getHouseList() {
     const res = await wx.http.get('/house')
     this.setData({
