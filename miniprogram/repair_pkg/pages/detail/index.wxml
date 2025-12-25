@@ -1,10 +1,11 @@
 <scroll-view scroll-y enhanced show-scrollbar="{{false}}">
   <view class="repair-detail">
-    <view class="polyline">
+    <view wx:if="{{list.status === 2}}" class="polyline">
       <!-- 小程序自带map组件 -->
       <map
         style="width: 100%; height: 100%;"
         scale="{{scale}}"
+        polyline="{{polyline}}"
         latitude="{{latitude}}"
         longitude="{{longitude}}"
         markers="{{markers}}"
@@ -14,8 +15,8 @@
     <van-cell-group border="{{false}}" title="房屋信息">
       <van-cell title="{{list.houseInfo}}">
         <text
-          class="tag {{item.status === 1 ? 'info' : item.status === 2 ? 'success' : item.status === 3 ? 'complete' : 'cancel'}}"
-          >{{item.status === 1 ? '受理中' : item.staus === 2 ? '上门中' : item.status === 3 ? '已完成' : '已取消'}}
+          class="tag {{list.status === 1 ? 'info' : list.status === 2 ? 'success' : list.status === 3 ? 'complete' : 'cancel'}}"
+          >{{list.status === 1 ? '受理中' : list.status === 2 ? '上门中' : list.status === 3 ? '已完成' : '已取消'}}
         </text>
       </van-cell>
     </van-cell-group>
@@ -23,23 +24,20 @@
     <van-cell-group title="报修信息" border="{{false}}">
       <van-cell title-width="200rpx" title="维修项目" value="{{list.repairItemName}}" />
       <van-cell title-width="200rpx" title="手机号码" value="{{list.mobile}}" />
-      <van-cell title-width="200rpx" title="预约日期" value="{{list.appoiniment}}" />
-      <van-cell
-        title="问题描述"
-        label="{{list.description}}"
-      />
+      <van-cell title-width="200rpx" title="预约日期" value="{{list.appointment}}" />
+      <van-cell title="问题描述" label="{{list.description}}" />
     </van-cell-group>
 
     <view class="attachment">
       <view class="title">问题附件</view>
       <scroll-view scroll-x>
-        <image wx:for="{{list.attachment}}" src="{{item.url}}"></image>
+        <image wx:for="{{list.attachment}}" src="{{item.url}}" wx:key="id"></image>
       </scroll-view>
     </view>
   </view>
 </scroll-view>
 
 <view class="toolbar">
-  <view class="button-text active">修改信息</view>
+  <view class="button-text active" bind:tap="editRepair" mark:id="{{id}}">修改信息</view>
   <view bind:tap="test" class="button-text">取消报修</view>
 </view>

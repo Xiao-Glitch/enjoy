@@ -10,7 +10,7 @@ Page({
     minDate: new Date().getTime(),
     maxDate: new Date().getTime() + 60 * 60 * 24 * 6 * 1000,
     houseList: [],
-    houseName: '',
+    houseInfo: '',
     repairItem: [],
     repairName: '',
     id: undefined,
@@ -83,7 +83,7 @@ Page({
     // console.log('selectHouse',ev.detail);
     this.setData({
       houseId: ev.detail.id,
-      houseName: ev.detail.name,
+      houseInfo: ev.detail.name,
     })
   },
   // 选择报修项目
@@ -134,9 +134,12 @@ Page({
     }
     callback(true)
   },
-  onLoad() {
+  onLoad(query) {
     this.getHouseList()
     this.getRepairList()
+    this.setData({
+      id: query.id
+    })
   },
   async getHouseList() {
     const res = await wx.http.get('/house')

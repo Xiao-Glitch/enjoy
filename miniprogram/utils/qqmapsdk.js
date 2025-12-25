@@ -5,6 +5,4 @@ const qqmapsdk = new QQMapWX({
   key: 'B47BZ-UVNK3-4MR34-RDU4V-DEKI7-NLBGK',
 })
 
-export default {
-  qqmapsdk,
-}
+export default qqmapsdk

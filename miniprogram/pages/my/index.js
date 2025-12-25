@@ -23,7 +23,7 @@ Page({
   // 获取用户信息
   async getUserInfo() {
     const res = await wx.http.get('/userInfo')
-    // console.log('用户信息', res);
+    console.log('用户信息', res);
     this.setData({
       userInfo: res.data
     })
