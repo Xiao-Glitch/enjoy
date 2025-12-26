@@ -39,5 +39,5 @@
 
 <view class="toolbar">
   <view class="button-text active" bind:tap="editRepair" mark:id="{{id}}">修改信息</view>
-  <view bind:tap="test" class="button-text">取消报修</view>
+  <view wx:if="{{list.status === 1}}" bind:tap="canceRepair" mark:id="{{id}}" class="button-text">取消报修</view>
 </view>

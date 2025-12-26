@@ -60,23 +60,34 @@ Page({
           points.push({ latitude: coors[i], longitude: coors[i + 1] })
         }
         // console.log(points)
-        this,this.setData({
-          latitude: points[0].latitude,
-          longitude: points[0].longitude,
-          polyline: [{
-            points,
-            color: '#5591af',
-            width: 4,
-
-          }]
-        })
+        this,
+          this.setData({
+            latitude: points[0].latitude,
+            longitude: points[0].longitude,
+            polyline: [
+              {
+                points,
+                color: '#5591af',
+                width: 4,
+              },
+            ],
+          })
       },
     })
   },
 
   editRepair(ev) {
     wx.navigateTo({
-      url: '/repair_pkg/pages/form/index?id=' + ev.mark.id
+      url: '/repair_pkg/pages/form/index?id=' + ev.mark.id,
     })
-  }
+  },
+  async canceRepair(ev) {
+    const res = await wx.http.put('/cancel/repaire/' + ev.mark.id)
+    if (res.code !== 10000) return wx.utils.toast()
+      wx.navigateTo({
+        url: '/repair_pkg/pages/list/index'
+      })
+    // console.log(res);
+    
+  },
 })
