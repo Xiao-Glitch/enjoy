@@ -23,6 +23,43 @@ const utils = {
     const day = String(date.getDate()).padStart(2, '0')
     return `${year}-${month}-${day}`
   },
+
+
+  /**
+   * 防抖
+   * @param {*} fn 
+   * @param {*} delay 
+   * @param {*} immediate 
+   * @returns 
+   */
+  debounce(fn, delay, immediate) {
+    let timer = null
+    return function(...args) {
+      if (timer) clearInterval(timer)
+      if (immediate && !timer) fn.apply(this, args)
+        timer = setTimeout(() => {
+          fn.apply(this, args)
+        }, delay)
+    }
+  },
+
+  /**
+   * 节流
+   * @param {*} fn 
+   * @param {*} delay 
+   * @returns 
+   */
+  throttle(fn, delay) {
+    let last = 0
+    return function (...args) {
+      const now = Date.now()
+      if (now - last > delay) {
+        fn.apply(this, args)
+        last = now
+
+      }
+    }
+  }
 }
 
 // 模块导出
