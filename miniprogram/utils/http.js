@@ -27,6 +27,16 @@ http.intercept.response = async (res) => {
     if (res.config.url.includes('/refreshToken')) {
       app.setToken('token', '')
       app.setToken('refresh_token', '')
+      // 获取当前页面栈数组
+        const pages = getCurrentPages()
+        // 获取当前页面实例
+        const page = pages[pages.length - 1]
+        // console.log(currentPage);
+
+        // 关闭当前页面，跳转到应用内的某个页面。
+        wx.redirectTo({
+          url: '/pages/login/index?redirectUrl=/' + page.route,
+        })
       setTimeout(() => {
         wx.utils.toast('登录过期, 请重新登录')
       }, 500)
