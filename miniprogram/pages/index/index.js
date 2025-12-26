@@ -1,3 +1,4 @@
+import qqmapsdk from "../../utils/qqmapsdk"
 Page({
   data: {
     list: []
