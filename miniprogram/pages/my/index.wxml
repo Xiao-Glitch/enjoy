@@ -2,8 +2,10 @@
   <view class="profile-base">
     <image class="avatar" src="{{ userInfo.avatar || '/static/images/avatar_1.jpg'}}"></image>
     <text bind:tap="goLogin" class="nickname">{{ userInfo.nickName || '匿名用户' }}</text>
-    <navigator wx:if="{{userInfo}}" hover-class="none" class="link" url="/pages/profile/index">
-      去完善信息<text class="enjoy-icon icon-arrow"></text>
+    <navigator hover-class="none" class="link" url="/pages/profile/index">
+      <text wx:if="{{!userInfo}}">去完善信息</text>
+      <text>去修改信息</text>
+      <text class="enjoy-icon icon-arrow"></text>
     </navigator>
   </view>
   <view class="profile-extra">

@@ -1,5 +1,6 @@
 Page({
   goLogin() {
+    if(wx.getStorageSync('token')) return wx.utils.toast('已登录')
     wx.navigateTo({
       url: '/pages/login/index',
     })
